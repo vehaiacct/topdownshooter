@@ -1,6 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-
+const gameState = window.gameState;
 const SKINS = {
   default: { fill: "#fff", stroke: "#0ff", glow: "#0ff" },
   neon: { fill: "#111", stroke: "#39ff14", glow: "#39ff14" },
