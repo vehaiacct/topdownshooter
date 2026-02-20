@@ -21,6 +21,9 @@ const users = new Map();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key';
 
+// Health check for Railway
+app.get('/health', (req, res) => res.send('OK'));
+
 // Routes
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -131,11 +134,8 @@ spawnBot('bot3', 'Bot Gamma');
 // Start game loop
 startGameLoop(io, null);
 
-// Start server
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log('Server running on port', PORT));
+// Start server with Railway fix
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, '0.0.0.0', () => {
   console.log('Server running on port', PORT);
-
 });
