@@ -21,6 +21,10 @@ const users = new Map();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key';
 
+// Health check - MUST be first!
+app.get('/health', (req, res) => res.send('OK'));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../client/index.html')));
+
 // Routes
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -134,3 +138,8 @@ startGameLoop(io, null);
 // Start server
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log('Server running on port', PORT));
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, '0.0.0.0', () => {
+  console.log('Server running on port', PORT);
+
+});
