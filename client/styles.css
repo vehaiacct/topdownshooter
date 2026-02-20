@@ -1,10 +1,184 @@
-body { margin: 0; overflow: hidden; font-family: sans-serif; background: #0f172a; color: #fff; }
-#loginScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-#loginScreen input, #loginScreen button { margin: 5px; padding: 10px; font-size: 16px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-#gameCanvas { display: block; }
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
-#touchControls { position: absolute; bottom: 20px; left: 0; width: 100%; height: 200px; pointer-events: none; }
-#joystickBase { position: absolute; bottom: 20px; left: 20px; width: 100px; height: 100px; background: rgba(255,255,255,0.2); border-radius: 50%; pointer-events: auto; }
-#joystickKnob { position: absolute; bottom: 20px; left: 20px; width: 50px; height: 50px; background: rgba(255,255,255,0.6); border-radius: 50%; transform: translate(-25px,-25px); pointer-events: auto; }
-#fireBtn { position: absolute; bottom: 40px; right: 40px; width: 80px; height: 80px; background: rgba(255,0,0,0.6); border-radius: 50%; font-weight: bold; font-size: 16px; pointer-events: auto; }
+#loginScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+#loginScreen h2 {
+    margin-bottom: 30px;
+    color: #0ff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    font-size: 2.5rem;
+}
+
+#loginScreen input {
+    margin: 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #fff;
+    width: 300px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#loginScreen input:focus {
+    border-color: #0ff;
+}
+
+#loginScreen button {
+    margin: 10px;
+    padding: 15px 40px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 300px;
+}
+
+#loginBtn {
+    background: linear-gradient(135deg, #0ff, #0088ff);
+    color: #000;
+    font-weight: bold;
+}
+
+#loginBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+}
+
+#registerBtn {
+    background: transparent;
+    border: 2px solid #0ff !important;
+    color: #0ff;
+}
+
+#registerBtn:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+#gameScreen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#touchControls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    pointer-events: none;
+    display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #touchControls {
+        display: block;
+    }
+}
+
+#joystickBase {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    pointer-events: auto;
+    touch-action: none;
+}
+
+#joystickKnob {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(35px, 35px);
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+#fireBtn {
+    position: absolute;
+    bottom: 50px;
+    right: 40px;
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 68, 68, 0.6);
+    border: 3px solid rgba(255, 68, 68, 0.8);
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    pointer-events: auto;
+    touch-action: none;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+}
+
+#fireBtn:active {
+    transform: scale(0.95);
+    background: rgba(255, 68, 68, 0.8);
+}
+
+#leaderboard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+}
+
+#leaderboard h4 {
+    color: #0ff;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    padding-bottom: 5px;
+}
+
+#errorMsg {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 68, 68, 0.2);
+    border: 1px solid #ff4444;
+    border-radius: 5px;
+}

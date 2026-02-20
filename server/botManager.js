@@ -1,4 +1,4 @@
-// server/botManager.js
+
 const { bots } = require('./gameLoop');
 
 function spawnBot(id, name) {
