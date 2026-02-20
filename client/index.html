@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top-Down Shooter</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="loginScreen">
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <button id="registerBtn">Register</button>
+</div>
+
+<div id="gameScreen" style="display:none;">
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Mobile Controls -->
+  <div id="touchControls">
+    <div id="joystickBase"></div>
+    <div id="joystickKnob"></div>
+    <button id="fireBtn">FIRE</button>
+  </div>
+
+  <div id="leaderboard"></div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.1/socket.io.min.js"></script>
+<script src="socket.js"></script>
+<script src="game.js"></script>
+<script src="renderer.js"></script>
+<script src="input.js"></script>
+<script src="ui.js"></script>
+</body>
+      </html>
