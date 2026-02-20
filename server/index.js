@@ -13,8 +13,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static client files
+// Serve static client files (try multiple paths for flexibility)
 app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, './')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // In-memory storage (no database!)
 const users = new Map();
@@ -73,16 +75,25 @@ app.get('/leaderboard', (req, res) => {
 
 // HTTP Server & Socket.io
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: '*' } });
+const io = new Server(server, {
+  cors: { origin: '*' },
+  transports: ['websocket', 'polling'],
+  pingTimeout: 60000,
+  pingInterval: 25000
+});
 
 io.on('connection', (socket) => {
   console.log('New connection:', socket.id);
 
   socket.on('joinGame', async ({ token }) => {
     try {
+      console.log('Join game requested with token');
       const decoded = jwt.verify(token, JWT_SECRET);
       const userData = users.get(decoded.username);
-      if (!userData) return socket.emit('error', { message: 'User not found' });
+      if (!userData) {
+        console.log('User not found:', decoded.username);
+        return socket.emit('error', { message: 'User not found' });
+      }
 
       players[socket.id] = {
         id: socket.id,
@@ -98,7 +109,7 @@ io.on('connection', (socket) => {
       };
 
       socket.emit('init', { selfId: socket.id, players, bots, bullets });
-      console.log(`Player ${userData.username} joined`);
+      console.log(`Player ${userData.username} joined successfully`);
     } catch (err) {
       console.log('Invalid token:', err.message);
       socket.emit('error', { message: 'Invalid token' });

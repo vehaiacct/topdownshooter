@@ -2,11 +2,22 @@ let socket;
 let selfId;
 
 function connectSocket(token) {
-  socket = io();
+  // Connect with proper configuration for Railway deployment
+  socket = io({
+    transports: ['websocket', 'polling'],
+    path: '/socket.io/',
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000
+  });
 
   socket.on("connect", () => {
-    console.log("Connected to server");
+    console.log("Connected to server, socket id:", socket.id);
     socket.emit("joinGame", { token });
+  });
+
+  socket.on("connect_error", (err) => {
+    console.error("Connection error:", err.message);
   });
 
   socket.on("init", data => {
