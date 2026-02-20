@@ -1,5 +1,4 @@
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+// Use canvas and ctx from game.js (already declared)
 const gameState = window.gameState;
 const SKINS = {
   default: { fill: "#fff", stroke: "#0ff", glow: "#0ff" },
