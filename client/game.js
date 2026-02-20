@@ -8,7 +8,8 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-const gameState = {
+// NEW (make it global)
+window.gameState = {
     selfId: null,
     players: {},
     bots: {},
