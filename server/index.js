@@ -21,10 +21,6 @@ const users = new Map();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key';
 
-// Health check - MUST be first!
-app.get('/health', (req, res) => res.send('OK'));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../client/index.html')));
-
 // Routes
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
