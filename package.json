@@ -1,0 +1,21 @@
+{
+  "name": "top-down-shooter-backend",
+  "version": "1.0.0",
+  "description": "Node.js + TypeScript backend for top-down shooter",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "@types/node": "^20.5.1",
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.1",
+    "nodemon": "^3.0.3"
+  }
+}
